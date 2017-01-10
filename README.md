@@ -7,7 +7,7 @@ A goroutine safe sql.Stmt for global usage in your application.
 Install
 ===========
 ```bash
-go get -u github.com/zeayes/Singleton
+go get -u github.com/zeayes/SingletonStmt
 ```
 
 Benchmark

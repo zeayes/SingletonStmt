@@ -1,0 +1,11 @@
+language: go
+
+services:
+    - mysql
+
+go:
+    - 1.6
+    - 1.7.x
+
+install:
+    - go get -u github.com/zeayes/SingletonStmt

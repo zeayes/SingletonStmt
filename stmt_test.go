@@ -32,7 +32,7 @@ func init() {
 }
 
 func setup(db *sql.DB) (err error) {
-	_, err = db.Exec("DROP TABLE IF EXISTS 'test'")
+	_, err = db.Exec("DROP TABLE IF EXISTS `test`")
 	if err != nil {
 		return
 	}
