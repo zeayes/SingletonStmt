@@ -21,7 +21,7 @@ var (
 
 func init() {
 	var err error
-	db, err = sql.Open("mysql", "root:@tcp(127.0.0.1:3306)/test?timeout=3s")
+	db, err = sql.Open("mysql", "root:@tcp(127.0.0.1:3306)/information_schema?timeout=3s")
 	if err != nil {
 		log.Fatalf("open db error: %v", err)
 	}
@@ -32,6 +32,14 @@ func init() {
 }
 
 func setup(db *sql.DB) (err error) {
+	_, err = db.Exec("CREATE DATABASE IF NOT EXISTS `test`")
+	if err != nil {
+		return
+	}
+	_, err = db.Exec("USE `test`")
+	if err != nil {
+		return
+	}
 	_, err = db.Exec("DROP TABLE IF EXISTS `test`")
 	if err != nil {
 		return
