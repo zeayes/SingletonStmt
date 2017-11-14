@@ -12,7 +12,7 @@ go get -u github.com/zeayes/SingletonStmt
 
 Benchmark
 ===========
-benchmark on MBP(Mid 2015 2.2 GHz 16GB), and memcached served by default options.
+benchmark on MBP(Mid 2015 2.2 GHz 16GB), and mysql(5.7.20) served by default options.
 ```
 go test -run=^$ -bench .
 BenchmarkDefaultBatchQuery-8    	    2000	    996211 ns/op	    6593 B/op	     400 allocs/op
