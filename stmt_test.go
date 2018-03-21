@@ -71,6 +71,17 @@ func TestSingletonStmt(t *testing.T) {
 	}
 }
 
+func TestSingletonStmtWithTableNotExist(t *testing.T) {
+	single := NewSingletonStmt(db, "SELECT * FROM users WHERE id = ?")
+	err := single.GetStmt()
+	if err == nil {
+		t.Fatalf("TestSingletonStmtWithTableNotExist expect error but got nil")
+	}
+	if err.Error() != "Error 1146: Table 'test.users' doesn't exist" {
+		t.Fatalf("TestSingletonStmtWithTableNotExist error message corrent: %v", err.Error())
+	}
+}
+
 func BenchmarkDefaultQuery(b *testing.B) {
 	b.ReportAllocs()
 	b.ResetTimer()

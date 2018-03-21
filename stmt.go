@@ -7,7 +7,7 @@ import (
 
 // SingletonStmt sql.Stmt singleton
 type SingletonStmt struct {
-	sync.Once
+	once  sync.Once
 	db    *sql.DB
 	query string
 	Stmt  *sql.Stmt
@@ -23,10 +23,15 @@ func (ss *SingletonStmt) GetStmt() (err error) {
 	if ss.Stmt != nil {
 		return
 	}
-	ss.Do(func() {
+	defer func() {
+		if e := recover(); e != nil {
+			err = e.(error)
+		}
+	}()
+	ss.once.Do(func() {
 		ss.Stmt, err = ss.db.Prepare(ss.query)
 		if err != nil {
-			return
+			panic(err)
 		}
 	})
 	return
